@@ -9,6 +9,7 @@
 
 #include "background_music_player.h"
 #include "common/config.h"
+#include "common/discord_rpc_handler.h"
 #include "common/path_util.h"
 #include "core/file_format/psf.h"
 #include "core/file_sys/fs.h"
@@ -94,6 +95,8 @@ private:
     QTranslator* translator;
 
 protected:
+    bool eventFilter(QObject* obj, QEvent* event) override;
+
     void dragEnterEvent(QDragEnterEvent* event1) override {
         if (event1->mimeData()->hasUrls()) {
             event1->acceptProposedAction();
@@ -108,10 +111,7 @@ protected:
             int nPkg = urlList.size();
             for (const QUrl& url : urlList) {
                 pkgNum++;
-                std::filesystem::path path(url.toLocalFile().toStdString());
-#ifdef _WIN64
-                path = std::filesystem::path(url.toLocalFile().toStdWString());
-#endif
+                std::filesystem::path path = Common::FS::PathFromQString(url.toLocalFile());
                 InstallDragDropPkg(path, pkgNum, nPkg);
             }
         }

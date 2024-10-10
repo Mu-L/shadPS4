@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="tr_TR">
 	<!-- SPDX-FileCopyrightText: Copyright 2024 shadPS4 Emulator Project
@@ -475,11 +475,6 @@
 			<translation>NULL GPU'yu Etkinleştir</translation>
 		</message>
 		<message>
-			<location filename="../settings_dialog.ui" line="476"/>
-			<source>Enable PM4 Dumping</source>
-			<translation>PM4 Kaydını Etkinleştir</translation>
-		</message>
-		<message>
 			<location filename="../settings_dialog.ui" line="517"/>
 			<source>Debug</source>
 			<translation>Hata Ayıklama</translation>
@@ -515,6 +510,11 @@
 			<translation>Başlangıçta güncellemeleri kontrol et</translation>
 		</message>
 		<message>
+			<location filename="../settings_dialog.ui" line="313"/>
+			<source>Update Channel</source>
+			<translation>Güncelleme Kanalı</translation>
+		</message>
+		<message>
 			<location filename="../settings_dialog.ui" line="322"/>
 			<source>Check for Updates</source>
 			<translation>Güncellemeleri kontrol et</translation>
@@ -528,6 +528,11 @@
 			<location filename="../settings_dialog.ui" line="375"/>
 			<source>Play title music</source>
 			<translation>Başlık müziğini çal</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.ui" line="394"/>
+			<source>Volume</source>
+			<translation>Ses seviyesi</translation>
 		</message>
 	</context>
 	<context>
@@ -963,6 +968,106 @@
 			<source>Close</source>
 			<translation>Kapat</translation>
 		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="72"/>
+			<source>Point your mouse at an option to display its description.</source>
+			<translation>Seçenek üzerinde farenizi tutarak açıklamasını görüntüleyin.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="289"/>
+			<source>consoleLanguageGroupBox</source>
+			<translation>Konsol Dili:\nPS4 oyununun kullandığı dili ayarlar.\nBu seçeneği, oyunun desteklediği bir dilde ayarlamanız önerilir; bu durum bölgeye göre değişebilir.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="291"/>
+			<source>emulatorLanguageGroupBox</source>
+			<translation>Emülatör Dili:\nEmülatörün kullanıcı arayüzünün dilini ayarlar.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="293"/>
+			<source>fullscreenCheckBox</source>
+			<translation>Tam Ekranı Etkinleştir:\nOyun penceresini otomatik olarak tam ekran moduna alır.\nBu, F11 tuşuna basarak geçiş yapılabilir.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="295"/>
+			<source>showSplashCheckBox</source>
+			<translation>Açılış Ekranını Göster:\nOyun açılırken (özel bir görüntü) açılış ekranını gösterir.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="297"/>
+			<source>ps4proCheckBox</source>
+			<translation>PS4 Pro Mu:\nEmülatörü bir PS4 PRO gibi çalıştırır; bu, bunu destekleyen oyunlarda özel özellikleri etkinleştirebilir.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="299"/>
+			<source>userName</source>
+			<translation>Kullanıcı Adı:\nBazı oyunlar tarafından gösterilebilen PS4 hesabının kullanıcı adını ayarlar.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="301"/>
+			<source>logTypeGroupBox</source>
+			<translation>Günlük Türü:\nPerformans için günlük penceresi çıkışını senkronize etme durumunu ayarlar. Bu, emülasyonda olumsuz etkilere yol açabilir.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="303"/>
+			<source>logFilter</source>
+			<translation>Günlük Filtre: Sadece belirli bilgileri yazdırmak için günlüğü filtreler. Örnekler: "Core:Trace" "Lib.Pad:Debug Common.Filesystem:Error" "*:Critical" Düzeyler: Trace, Debug, Info, Warning, Error, Critical - bu sırada, belirli bir seviye listede önceki tüm seviyeleri susturur ve sonraki tüm seviyeleri kaydeder.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="305"/>
+			<source>updaterGroupBox</source>
+			<translation>Güncelleme:\nRelease: Her ay yayınlanan resmi sürümler; çok eski olabilirler, ancak daha güvenilirdir ve test edilmiştir.\nNightly: Tüm en son özellikler ve düzeltmeler ile birlikte geliştirme sürümleri; hatalar içerebilir ve daha az kararlıdırlar.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="306"/>
+			<source>GUIgroupBox</source>
+			<translation>Başlık Müziklerini Çal:\nEğer bir oyun bunu destekliyorsa, GUI'de oyunu seçtiğinizde özel müziklerin çalmasını etkinleştirir.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="312"/>
+			<source>graphicsAdapterGroupBox</source>
+			<translation>Grafik Aygıtı:\nBirden fazla GPU'ya sahip sistemlerde, emülatörün kullanacağı GPU'yu açılır listeden seçin,\nor "Auto Select" seçeneğini seçerek otomatik olarak belirlenmesini sağlayın.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="314"/>
+			<source>resolutionLayout</source>
+			<translation>Genişlik/Yükseklik:\nEmülatör penceresinin açılışta boyutunu ayarlar; bu, oyun sırasında yeniden boyutlandırılabilir.\nBu, oyundaki çözünürlükten farklıdır.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="318"/>
+			<source>heightDivider</source>
+			<translation>Vblank Bölücü:\nEmülatörün yenileme hızı bu sayı ile çarpılır. Bu değerin değiştirilmesi olumsuz etkilere yol açabilir; oyun hızını artırabilir veya oyunun beklemediği kritik işlevselliği bozabilir!</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="320"/>
+			<source>dumpShadersCheckBox</source>
+			<translation>Shader'ları Dışa Aktarmayı Etkinleştir:\nTeknik hata ayıklama amacıyla, shader'ları render edildikçe bir klasöre kaydeder.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="322"/>
+			<source>nullGpuCheckBox</source>
+			<translation>Null GPU'yu Etkinleştir:\nTeknik hata ayıklama amacıyla, oyunun render edilmesini grafik kartı yokmuş gibi devre dışı bırakır.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="329"/>
+			<source>debugDump</source>
+			<translation>Hata Ayıklama için Dışa Aktarmayı Etkinleştir:\nŞu anda çalışan PS4 uygulaması için içe aktarılan ve dışa aktarılan sembolleri ve dosya başlık bilgilerini bir dizine kaydedin.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="331"/>
+			<source>vkValidationCheckBox</source>
+			<translation>Vulkan Doğrulama Katmanlarını Etkinleştir:\nVulkan renderlayıcısının durumunu doğrulayan ve iç durum hakkında bilgi kaydeden bir sistemi etkinleştirir. Bu, performansı düşürür ve muhtemelen emülasyon davranışını değiştirir.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="333"/>
+			<source>vkSyncValidationCheckBox</source>
+			<translation>Vulkan Senkronizasyon Doğrulamasını Etkinleştir:\nVulkan renderlama görevlerinin senkronizasyonunu doğrulayan bir sistemi etkinleştirir. Bu, performansı düşürür ve muhtemelen emülasyon davranışını değiştirir.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="335"/>
+			<source>rdocCheckBox</source>
+			<translation>RenderDoc Hata Ayıklamayı Etkinleştir:\nEğer etkinleştirilirse, emülatör mevcut render edilmiş çerçeveyi yakalamak ve analiz etmek için Renderdoc ile uyumluluk sunar.</translation>
+		</message>
 	</context>
 	<context>
 		<name>GameListFrame</name>
@@ -1006,6 +1111,11 @@
 			<source>Path</source>
 			<translation>Yol</translation>
 		</message>
+		<message>
+			<location filename="../game_list_frame.cpp" line="38"/>
+			<source>Play Time</source>
+			<translation>Oynama Süresi</translation>
+		</message>
 	</context>
 	<context>
 		<name>CheckUpdate</name>
@@ -1018,16 +1128,6 @@
 			<location filename="../check_update.cpp" line="51"/>
 			<source>Error</source>
 			<translation>Hata</translation>
-		</message>
-		<message>
-			<location filename="../check_update.cpp" line="52"/>
-			<source>Invalid update channel: </source>
-			<translation>Geçersiz güncelleme kanalı: </translation>
-		</message>
-		<message>
-			<location filename="../check_update.cpp" line="53"/>
-			<source>In updateChannel in config.tml file must contain 'stable' or 'unstable'</source>
-			<translation>config.tml dosyasındaki updateChannel 'stable' veya 'unstable' içermelidir</translation>
 		</message>
 		<message>
 			<location filename="../check_update.cpp" line="64"/>
@@ -1063,6 +1163,11 @@
 			<location filename="../check_update.cpp" line="172"/>
 			<source>Update Available</source>
 			<translation>Güncelleme Mevcut</translation>
+		</message>
+		<message> 
+			<location filename="../check_update.cpp" line="187"/>
+			<source>Update Channel</source>
+			<translation>Güncelleme Kanalı</translation>
 		</message>
 		<message>
 			<location filename="../check_update.cpp" line="177"/>

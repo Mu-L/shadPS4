@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="fi">
 	<!-- SPDX-FileCopyrightText: Copyright 2024 shadPS4 Emulator Project
@@ -475,11 +475,6 @@
 			<translation>Enable NULL GPU</translation>
 		</message>
 		<message>
-			<location filename="../settings_dialog.ui" line="476"/>
-			<source>Enable PM4 Dumping</source>
-			<translation>Enable PM4 Dumping</translation>
-		</message>
-		<message>
 			<location filename="../settings_dialog.ui" line="517"/>
 			<source>Debug</source>
 			<translation>Debug</translation>
@@ -515,6 +510,11 @@
 			<translation>Tarkista päivitykset alussa</translation>
 		</message>
 		<message>
+			<location filename="../settings_dialog.ui" line="313"/>
+			<source>Update Channel</source>
+			<translation>Päivityskanava</translation>
+		</message>
+		<message>
 			<location filename="../settings_dialog.ui" line="322"/>
 			<source>Check for Updates</source>
 			<translation>Tarkista päivitykset</translation>
@@ -528,6 +528,11 @@
 			<location filename="../settings_dialog.ui" line="375"/>
 			<source>Play title music</source>
 			<translation>Soita otsikkomusiikkia</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.ui" line="394"/>
+			<source>Volume</source>
+			<translation>Äänenvoimakkuus</translation>
 		</message>
 	</context>
 	<context>
@@ -963,6 +968,106 @@
 			<source>Close</source>
 			<translation>Sulje</translation>
 		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="72"/>
+			<source>Point your mouse at an option to display its description.</source>
+			<translation>Siirrä hiiri vaihtoehdon päälle näyttämään sen kuvaus.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="289"/>
+			<source>consoleLanguageGroupBox</source>
+			<translation>Konsoli Kieli:\nAseta PS4 pelin käyttämä kieli.\nOn suositeltavaa asettaa tämä kieleksi, jota peli tukee, mikä vaihtelee alueittain.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="291"/>
+			<source>emulatorLanguageGroupBox</source>
+			<translation>Emulaattorin Kieli:\nAsettaa emulaattorin käyttöliittymän kielen.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="293"/>
+			<source>fullscreenCheckBox</source>
+			<translation>Ota Täysikokoisuus käyttöön:\nSiirtää pelin ikkunan automaattisesti täysikokoiseen tilaan.\nTätä voidaan vaihtaa painamalla F11-näppäintä.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="295"/>
+			<source>showSplashCheckBox</source>
+				<translation>Näytä Alkunäyttö:\nNäyttää pelin alkunäytön (erityinen kuva) pelin käynnistyessä.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="297"/>
+			<source>ps4proCheckBox</source>
+			<translation>Onko PS4 Pro:\nAsettaa emulaattorin toimimaan PS4 PRO:na, mikä voi mahdollistaa erityisiä ominaisuuksia peleissä, jotka tukevat sitä.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="299"/>
+			<source>userName</source>
+			<translation>Käyttäjänimi:\nAsettaa PS4-tilin käyttäjänimen, joka voi näkyä joissakin peleissä.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="301"/>
+			<source>logTypeGroupBox</source>
+			<translation>Lokityyppi:\nAsettaa, synkronoidaanko loki-ikkunan ulostulo suorituskyvyn vuoksi. Tämä voi vaikuttaa haitallisesti emulointiin.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="303"/>
+			<source>logFilter</source>
+			<translation>Lokifiltteri: Suodattaa lokia tulostamaan vain erityistä tietoa. Esimerkkejä: "Core:Trace" "Lib.Pad:Debug Common.Filesystem:Error" "*:Critical" Tasot: Jälki, Virheenkorjaus, Tieto, Varoitus, Virhe, Kriittinen - tällä järjestyksellä, tietty taso vaientaa kaikki edeltävät tasot luettelossa ja kirjaa kaikki tasot sen jälkeen.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="305"/>
+			<source>updaterGroupBox</source>
+			<translation>Päivitys:\nRelease: Viralliset versiot, jotka julkaistaan joka kuukausi ja voivat olla hyvin vanhoja, mutta ovat luotettavampia ja testatumpia.\nNightly: Kehitysversiot, joissa on kaikki uusimmat ominaisuudet ja korjaukset, mutta ne voivat sisältää bugeja ja ovat vähemmän vakaita.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="306"/>
+			<source>GUIgroupBox</source>
+			<translation>Soita Otsikkomusiikkia:\nJos peli tukee sitä, ota käyttöön erityisen musiikin soittaminen pelin valinnan yhteydessä käyttöliittymässä.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="312"/>
+			<source>graphicsAdapterGroupBox</source>
+			<translation>Kuvakortti:\nValitse GPU, jota emulaattori käyttää monigpu-järjestelmissä pudotusvalikosta,\n tai valitse "Auto Select" automaattiseen määrittämiseen.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="314"/>
+			<source>resolutionLayout</source>
+			<translation>Leveys/Korkeus:\nAsettaa emulaattorin ikkunan koon käynnistyksen aikana, jota voidaan muuttaa pelin aikana.\nTämä on eri kuin pelin sisäinen resoluutio.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="318"/>
+			<source>heightDivider</source>
+			<translation>Vblank Jakaja:\nEmulaattorin virkistystaajuus kerrotaan tällä numerolla. Tämän muuttaminen voi vaikuttaa haitallisesti, kuten pelin nopeuden lisääminen tai kriittisten pelitoimintojen rikkoutuminen, jotka eivät odota tämän muuttuvan!</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="320"/>
+			<source>dumpShadersCheckBox</source>
+			<translation>Ota Shadersin dumpaus käyttöön:\nTeknistä vianetsintää varten pelin shadereita tallennetaan kansioon niiden renderöinnin aikana.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="322"/>
+			<source>nullGpuCheckBox</source>
+			<translation>Ota Null GPU käyttöön:\nTeknistä vianetsintää varten pelin renderöinti estetään niin, että ikään kuin grafiikkakorttia ei olisi.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="329"/>
+			<source>debugDump</source>
+			<translation>Ota Debug Dumpaus käyttöön:\nTallentaa käynnissä olevan PS4-ohjelman tuonti- ja vientisymbolit ja tiedosto-otsikkotiedot hakemistoon.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="331"/>
+			<source>vkValidationCheckBox</source>
+			<translation>Ota Vulkanin Validointikerrokset käyttöön:\nAktivoi järjestelmä, joka validoi Vulkan-renderöijän tilan ja kirjaa tietoa sen sisäisestä tilasta. Tämä heikentää suorituskykyä ja todennäköisesti muuttaa emulaation käyttäytymistä.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="333"/>
+			<source>vkSyncValidationCheckBox</source>
+			<translation>Ota Vulkanin Synkronointivalaistus käyttöön:\nAktivoi järjestelmä, joka validoi Vulkan-renderöinnin tehtävien aikataulutuksen. Tämä heikentää suorituskykyä ja todennäköisesti muuttaa emulaation käyttäytymistä.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="335"/>
+			<source>rdocCheckBox</source>
+			<translation>Ota RenderDoc Debugging käyttöön:\nJos se on käytössä, emulaattori tarjoaa yhteensopivuuden Renderdocin kanssa, mikä mahdollistaa nykyisen renderöidyn kehyksen tallennuksen ja analysoinnin.</translation>
+		</message>
 	</context>
 	<context>
 		<name>GameListFrame</name>
@@ -1006,6 +1111,11 @@
 			<source>Path</source>
 			<translation>Polku</translation>
 		</message>
+		<message>
+			<location filename="../game_list_frame.cpp" line="38"/>
+			<source>Play Time</source>
+			<translation>Peliaika</translation>
+		</message>
 	</context>
 	<context>
 		<name>CheckUpdate</name>
@@ -1018,16 +1128,6 @@
 			<location filename="../check_update.cpp" line="51"/>
 			<source>Error</source>
 			<translation>Virhe</translation>
-		</message>
-		<message>
-			<location filename="../check_update.cpp" line="52"/>
-			<source>Invalid update channel: </source>
-			<translation>Virheellinen päivityskanava: </translation>
-		</message>
-		<message>
-			<location filename="../check_update.cpp" line="53"/>
-			<source>In updateChannel in config.tml file must contain 'stable' or 'unstable'</source>
-			<translation>config.tml-tiedoston updateChannelin on sisällettävä 'stable' tai 'unstable'</translation>
 		</message>
 		<message>
 			<location filename="../check_update.cpp" line="64"/>
@@ -1063,6 +1163,11 @@
 			<location filename="../check_update.cpp" line="172"/>
 			<source>Update Available</source>
 			<translation>Päivitys saatavilla</translation>
+		</message>
+		<message> 
+			<location filename="../check_update.cpp" line="187"/>
+			<source>Update Channel</source>
+			<translation>Päivityskanava</translation>
 		</message>
 		<message>
 			<location filename="../check_update.cpp" line="177"/>

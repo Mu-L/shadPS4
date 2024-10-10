@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="el">
 	<!-- SPDX-FileCopyrightText: Copyright 2024 shadPS4 Emulator Project
@@ -475,11 +475,6 @@
 			<translation>Enable NULL GPU</translation>
 		</message>
 		<message>
-			<location filename="../settings_dialog.ui" line="476"/>
-			<source>Enable PM4 Dumping</source>
-			<translation>Enable PM4 Dumping</translation>
-		</message>
-		<message>
 			<location filename="../settings_dialog.ui" line="517"/>
 			<source>Debug</source>
 			<translation>Debug</translation>
@@ -515,6 +510,11 @@
 			<translation>Έλεγχος για ενημερώσεις κατά την εκκίνηση</translation>
 		</message>
 		<message>
+			<location filename="../settings_dialog.ui" line="313"/>
+			<source>Update Channel</source>
+			<translation>Κανάλι Ενημέρωσης</translation>
+		</message>
+		<message>
 			<location filename="../settings_dialog.ui" line="322"/>
 			<source>Check for Updates</source>
 			<translation>Έλεγχος για ενημερώσεις</translation>
@@ -528,6 +528,11 @@
 			<location filename="../settings_dialog.ui" line="375"/>
 			<source>Play title music</source>
 			<translation>Αναπαραγωγή μουσικής τίτλου</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.ui" line="394"/>
+			<source>Volume</source>
+			<translation>ένταση</translation>
 		</message>
 	</context>
 	<context>
@@ -963,6 +968,106 @@
 			<source>Close</source>
 			<translation>Κλείσιμο</translation>
 		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="72"/>
+			<source>Point your mouse at an option to display its description.</source>
+			<translation>Τοποθετήστε το ποντίκι σας πάνω σε μια επιλογή για να εμφανίσετε την περιγραφή της.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="289"/>
+			<source>consoleLanguageGroupBox</source>
+			<translation>Γλώσσα Κονσόλας:\nΡυθμίζει τη γλώσσα που θα χρησιμοποιήσει το παιχνίδι PS4.\nΣυνιστάται να επιλέξετε μία από τις γλώσσες που υποστηρίζονται από το παιχνίδι, η οποία ενδέχεται να διαφέρει ανάλογα με την περιοχή.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="291"/>
+			<source>emulatorLanguageGroupBox</source>
+			<translation>Γλώσσα Εξομοιωτή:\nΡυθμίζει τη γλώσσα του γραφικού περιβάλλοντος του εξομοιωτή.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="293"/>
+			<source>fullscreenCheckBox</source>
+			<translation>Ενεργοποίηση Πλήρους Οθόνης:\nΑυτόματα μετατρέπει το παράθυρο του παιχνιδιού σε λειτουργία πλήρους οθόνης.\nΜπορεί να ενεργοποιηθεί/απενεργοποιηθεί πατώντας το πλήκτρο F11.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="295"/>
+			<source>showSplashCheckBox</source>
+			<translation>Εμφάνιση Splash Screen:\nΕμφανίζει ειδική γραφική οθόνη κατά την εκκίνηση.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="297"/>
+			<source>ps4proCheckBox</source>
+			<translation>Είναι PS4 Pro:\nΕπιτρέπει στον εξομοιωτή να λειτουργεί σαν PS4 PRO, κάτι που μπορεί να ενεργοποιήσει συγκεκριμένες λειτουργίες σε παιχνίδια που το υποστηρίζουν.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="299"/>
+			<source>userName</source>
+			<translation>Όνομα Χρήστη:\nΟρίζει το όνομα του λογαριασμού PS4, το οποίο μπορεί να εμφανιστεί σε ορισμένα παιχνίδια.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="301"/>
+			<source>logTypeGroupBox</source>
+			<translation>Τύπος Καταγραφής:\nΚαθορίζει αν η έξοδος του παραθύρου καταγραφής θα συγχρονιστεί για αύξηση της απόδοσης. Αυτό μπορεί να επηρεάσει αρνητικά τις επιδόσεις του εξομοιωτή.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="303"/>
+			<source>logFilter</source>
+			<translation>Φίλτρο Καταγραφής: Φιλτράρει τις καταγραφές ώστε να εκτυπώνονται μόνο συγκεκριμένες πληροφορίες. Παραδείγματα: "Core:Trace" "Lib.Pad:Debug Common.Filesystem:Error" "*:Critical" Επίπεδα: Trace, Debug, Info, Warning, Error, Critical - με τη σειρά αυτή, κάθε επίπεδο που επιλέγεται αποκλείει τα προηγούμενα και εμφανίζει τα επόμενα επίπεδα.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="305"/>
+			<source>updaterGroupBox</source>
+			<translation>Ενημερώσεις:\nRelease: Επίσημες εκδόσεις που κυκλοφορούν μηνιαίως, είναι παλαιότερες αλλά πιο σταθερές και δοκιμασμένες.\nNightly: Εκδόσεις προγραμματιστών με νέες δυνατότητες και διορθώσεις, αλλά μπορεί να περιέχουν σφάλματα και να είναι λιγότερο σταθερές.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="306"/>
+			<source>GUIgroupBox</source>
+			<translation>Αναπαραγωγή Μουσικής Τίτλων:\nΕάν το παιχνίδι το υποστηρίζει, ενεργοποιεί ειδική μουσική κατά την επιλογή του παιχνιδιού από τη διεπαφή χρήστη.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="312"/>
+			<source>graphicsAdapterGroupBox</source>
+			<translation>Προσαρμογέας Γραφικών:\nΣε συστήματα με πολλές GPU, επιλέξτε από το μενού την GPU που θα χρησιμοποιήσει ο εξομοιωτής,\nή επιλέξτε "Auto Select" για αυτόματη επιλογή.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="314"/>
+			<source>resolutionLayout</source>
+			<translation>Ανάλυση Οθόνης:\nΚαθορίζει το μέγεθος του παραθύρου του εξομοιωτή κατά την αναπαραγωγή, το οποίο μπορεί να αλλάξει κατά τη διάρκεια του παιχνιδιού.\nΑυτό είναι διαφορετικό από την ανάλυση του ίδιου του παιχνιδιού.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="318"/>
+			<source>heightDivider</source>
+			<translation>Διαιρέτης Συχνότητας Ανανέωσης:\nΠολλαπλασιάζει τον ρυθμό με τον οποίο ο εξομοιωτής ενημερώνει την εικόνα με αυτόν τον αριθμό. Η αλλαγή αυτής της ρύθμισης μπορεί να έχει αρνητικές επιπτώσεις, όπως ταχύτερο παιχνίδι ή σπασμένες λειτουργίες!</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="320"/>
+			<source>dumpShadersCheckBox</source>
+			<translation>Ενεργοποίηση Καταγραφής Σκιάσεων (Shaders):\nΓια τεχνικό εντοπισμό σφαλμάτων, αποθηκεύει τις σκιάσεις του παιχνιδιού σε φάκελο κατά τη διάρκεια της αναπαραγωγής.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="322"/>
+			<source>nullGpuCheckBox</source>
+			<translation>Ενεργοποίηση Εικονικής GPU:\nΓια τεχνικό εντοπισμό σφαλμάτων, απενεργοποιεί την εμφάνιση του παιχνιδιού σαν να μην υπάρχει κάρτα γραφικών.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="329"/>
+			<source>debugDump</source>
+			<translation>Ενεργοποίηση Καταγραφής Αποσφαλμάτωσης:\nΑποθηκεύει τα σύμβολα εισαγωγής/εξαγωγής και τις κεφαλίδες πληροφοριών του τρέχοντος προγράμματος PS4 σε έναν φάκελο.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="331"/>
+			<source>vkValidationCheckBox</source>
+			<translation>Ενεργοποίηση Επικύρωσης Vulkan:\nΕνεργοποιεί ένα σύστημα που επικυρώνει την κατάσταση του προγράμματος οδήγησης Vulkan και καταγράφει πληροφορίες για την εσωτερική του κατάσταση. Αυτό θα μειώσει την απόδοση και ενδέχεται να αλλάξει τη συμπεριφορά του εξομοιωτή.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="333"/>
+			<source>vkSyncValidationCheckBox</source>
+			<translation>Ενεργοποίηση Επικύρωσης Συγχρονισμού Vulkan:\nΕνεργοποιεί ένα σύστημα που επικυρώνει τον συγχρονισμό των εργασιών απόδοσης του Vulkan. Αυτό θα μειώσει την απόδοση και ενδέχεται να αλλάξει τη συμπεριφορά του εξομοιωτή.</translation>
+		</message>
+		<message>
+			<location filename="../settings_dialog.cpp" line="335"/>
+			<source>rdocCheckBox</source>
+			<translation>Ενεργοποίηση Καταγραφής RenderDoc:\nΌταν είναι ενεργοποιημένο, ο εξομοιωτής είναι συμβατός με το RenderDoc για τη λήψη και ανάλυση του τρέχοντος καρέ.</translation>
+		</message>
 	</context>
 	<context>
 		<name>GameListFrame</name>
@@ -1006,6 +1111,11 @@
 			<source>Path</source>
 			<translation>Διαδρομή</translation>
 		</message>
+		<message>
+			<location filename="../game_list_frame.cpp" line="38"/>
+			<source>Play Time</source>
+			<translation>Χρόνος παιχνιδιού</translation>
+		</message>
 	</context>
 	<context>
 		<name>CheckUpdate</name>
@@ -1018,16 +1128,6 @@
 			<location filename="../check_update.cpp" line="51"/>
 			<source>Error</source>
 			<translation>Σφάλμα</translation>
-		</message>
-		<message>
-			<location filename="../check_update.cpp" line="52"/>
-			<source>Invalid update channel: </source>
-			<translation>Μη έγκυρο κανάλι ενημέρωσης: </translation>
-		</message>
-		<message>
-			<location filename="../check_update.cpp" line="53"/>
-			<source>In updateChannel in config.tml file must contain 'stable' or 'unstable'</source>
-			<translation>Στο updateChannel του αρχείου config.tml πρέπει να περιέχει 'stable' ή 'unstable'</translation>
 		</message>
 		<message>
 			<location filename="../check_update.cpp" line="64"/>
@@ -1063,6 +1163,11 @@
 			<location filename="../check_update.cpp" line="172"/>
 			<source>Update Available</source>
 			<translation>Διαθέσιμη Ενημέρωση</translation>
+		</message>
+		<message> 
+			<location filename="../check_update.cpp" line="187"/>
+			<source>Update Channel</source>
+			<translation>Κανάλι Ενημέρωσης</translation>
 		</message>
 		<message>
 			<location filename="../check_update.cpp" line="177"/>

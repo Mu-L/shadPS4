@@ -3,10 +3,12 @@
 
 #include <fstream>
 #include <string>
+#include <common/version.h>
 #include <fmt/core.h>
 #include <fmt/xchar.h> // for wstring support
 #include <toml.hpp>
 #include "common/logging/formatter.h"
+#include "common/path_util.h"
 #include "config.h"
 
 namespace toml {
@@ -31,13 +33,16 @@ namespace Config {
 static bool isNeo = false;
 static bool isFullscreen = false;
 static bool playBGM = false;
+static int BGMvolume = 50;
+static bool enableDiscordRPC = false;
 static u32 screenWidth = 1280;
 static u32 screenHeight = 720;
 static s32 gpuId = -1; // Vulkan physical device index. Set to negative for auto select
 static std::string logFilter;
 static std::string logType = "async";
 static std::string userName = "shadPS4";
-static std::string updateChannel = "stable";
+static std::string updateChannel;
+static std::string backButtonBehavior = "left";
 static bool useSpecialPad = false;
 static int specialPadClass = 1;
 static bool isDebugDump = false;
@@ -46,7 +51,6 @@ static bool isAutoUpdate = false;
 static bool isNullGpu = false;
 static bool shouldCopyGPUBuffers = false;
 static bool shouldDumpShaders = false;
-static bool shouldDumpPM4 = false;
 static u32 vblankDivider = 1;
 static bool vkValidation = false;
 static bool vkValidationSync = false;
@@ -54,9 +58,12 @@ static bool vkValidationGpu = false;
 static bool rdocEnable = false;
 static bool vkMarkers = false;
 static bool vkCrashDiagnostic = false;
+static s16 cursorState = HideCursorState::Idle;
+static int cursorHideTimeout = 5; // 5 seconds (default)
 
 // Gui
-std::filesystem::path settings_install_dir = {};
+std::vector<std::filesystem::path> settings_install_dirs = {};
+std::filesystem::path settings_addon_install_dir = {};
 u32 main_window_geometry_x = 400;
 u32 main_window_geometry_y = 400;
 u32 main_window_geometry_w = 1280;
@@ -88,6 +95,22 @@ bool getPlayBGM() {
     return playBGM;
 }
 
+int getBGMvolume() {
+    return BGMvolume;
+}
+
+bool getEnableDiscordRPC() {
+    return enableDiscordRPC;
+}
+
+s16 getCursorState() {
+    return cursorState;
+}
+
+int getCursorHideTimeout() {
+    return cursorHideTimeout;
+}
+
 u32 getScreenWidth() {
     return screenWidth;
 }
@@ -114,6 +137,10 @@ std::string getUserName() {
 
 std::string getUpdateChannel() {
     return updateChannel;
+}
+
+std::string getBackButtonBehavior() {
+    return backButtonBehavior;
 }
 
 bool getUseSpecialPad() {
@@ -146,10 +173,6 @@ bool copyGPUCmdBuffers() {
 
 bool dumpShaders() {
     return shouldDumpShaders;
-}
-
-bool dumpPM4() {
-    return shouldDumpPM4;
 }
 
 bool isRdocEnabled() {
@@ -220,10 +243,6 @@ void setDumpShaders(bool enable) {
     shouldDumpShaders = enable;
 }
 
-void setDumpPM4(bool enable) {
-    shouldDumpPM4 = enable;
-}
-
 void setVkValidation(bool enable) {
     vkValidation = enable;
 }
@@ -246,6 +265,22 @@ void setFullscreenMode(bool enable) {
 
 void setPlayBGM(bool enable) {
     playBGM = enable;
+}
+
+void setBGMvolume(int volume) {
+    BGMvolume = volume;
+}
+
+void setEnableDiscordRPC(bool enable) {
+    enableDiscordRPC = enable;
+}
+
+void setCursorState(s16 newCursorState) {
+    cursorState = newCursorState;
+}
+
+void setCursorHideTimeout(int newcursorHideTimeout) {
+    cursorHideTimeout = newcursorHideTimeout;
 }
 
 void setLanguage(u32 language) {
@@ -272,6 +307,10 @@ void setUpdateChannel(const std::string& type) {
     updateChannel = type;
 }
 
+void setBackButtonBehavior(const std::string& type) {
+    backButtonBehavior = type;
+}
+
 void setUseSpecialPad(bool use) {
     useSpecialPad = use;
 }
@@ -286,8 +325,12 @@ void setMainWindowGeometry(u32 x, u32 y, u32 w, u32 h) {
     main_window_geometry_w = w;
     main_window_geometry_h = h;
 }
-void setGameInstallDir(const std::filesystem::path& dir) {
-    settings_install_dir = dir;
+void setGameInstallDirs(const std::vector<std::filesystem::path>& dir) {
+    settings_install_dirs.resize(dir.size());
+    settings_install_dirs = dir;
+}
+void setAddonInstallDir(const std::filesystem::path& dir) {
+    settings_addon_install_dir = dir;
 }
 void setMainWindowTheme(u32 theme) {
     mw_themes = theme;
@@ -342,8 +385,15 @@ u32 getMainWindowGeometryW() {
 u32 getMainWindowGeometryH() {
     return main_window_geometry_h;
 }
-std::filesystem::path getGameInstallDir() {
-    return settings_install_dir;
+std::vector<std::filesystem::path> getGameInstallDirs() {
+    return settings_install_dirs;
+}
+std::filesystem::path getAddonInstallDir() {
+    if (settings_addon_install_dir.empty()) {
+        // Default for users without a config file or a config file from before this option existed
+        return Common::FS::GetUserPath(Common::FS::PathType::UserDir) / "addcont";
+    }
+    return settings_addon_install_dir;
 }
 u32 getMainWindowTheme() {
     return mw_themes;
@@ -411,10 +461,16 @@ void load(const std::filesystem::path& path) {
         isNeo = toml::find_or<bool>(general, "isPS4Pro", false);
         isFullscreen = toml::find_or<bool>(general, "Fullscreen", false);
         playBGM = toml::find_or<bool>(general, "playBGM", false);
+        BGMvolume = toml::find_or<int>(general, "BGMvolume", 50);
+        enableDiscordRPC = toml::find_or<bool>(general, "enableDiscordRPC", true);
         logFilter = toml::find_or<std::string>(general, "logFilter", "");
         logType = toml::find_or<std::string>(general, "logType", "sync");
         userName = toml::find_or<std::string>(general, "userName", "shadPS4");
-        updateChannel = toml::find_or<std::string>(general, "updateChannel", "stable");
+        if (Common::isRelease) {
+            updateChannel = toml::find_or<std::string>(general, "updateChannel", "Release");
+        } else {
+            updateChannel = toml::find_or<std::string>(general, "updateChannel", "Nightly");
+        }
         isShowSplash = toml::find_or<bool>(general, "showSplash", true);
         isAutoUpdate = toml::find_or<bool>(general, "autoUpdate", false);
     }
@@ -422,6 +478,9 @@ void load(const std::filesystem::path& path) {
     if (data.contains("Input")) {
         const toml::value& input = data.at("Input");
 
+        cursorState = toml::find_or<int>(input, "cursorState", HideCursorState::Idle);
+        cursorHideTimeout = toml::find_or<int>(input, "cursorHideTimeout", 5);
+        backButtonBehavior = toml::find_or<std::string>(input, "backButtonBehavior", "left");
         useSpecialPad = toml::find_or<bool>(input, "useSpecialPad", false);
         specialPadClass = toml::find_or<int>(input, "specialPadClass", 1);
     }
@@ -434,7 +493,6 @@ void load(const std::filesystem::path& path) {
         isNullGpu = toml::find_or<bool>(gpu, "nullGpu", false);
         shouldCopyGPUBuffers = toml::find_or<bool>(gpu, "copyGPUBuffers", false);
         shouldDumpShaders = toml::find_or<bool>(gpu, "dumpShaders", false);
-        shouldDumpPM4 = toml::find_or<bool>(gpu, "dumpPM4", false);
         vblankDivider = toml::find_or<int>(gpu, "vblankDivider", 1);
     }
 
@@ -466,7 +524,25 @@ void load(const std::filesystem::path& path) {
         mw_themes = toml::find_or<int>(gui, "theme", 0);
         m_window_size_W = toml::find_or<int>(gui, "mw_width", 0);
         m_window_size_H = toml::find_or<int>(gui, "mw_height", 0);
-        settings_install_dir = toml::find_fs_path_or(gui, "installDir", {});
+
+        auto old_game_install_dir = toml::find_fs_path_or(gui, "installDir", {});
+        if (!old_game_install_dir.empty()) {
+            settings_install_dirs.push_back(old_game_install_dir);
+            data.as_table().erase("installDir");
+        }
+
+        const auto install_dir_array =
+            toml::find_or<std::vector<std::string>>(gui, "installDirs", {});
+        for (const auto& dir : install_dir_array) {
+            bool not_already_included =
+                std::find(settings_install_dirs.begin(), settings_install_dirs.end(), dir) ==
+                settings_install_dirs.end();
+            if (not_already_included) {
+                settings_install_dirs.emplace_back(std::filesystem::path{dir});
+            }
+        }
+
+        settings_addon_install_dir = toml::find_fs_path_or(gui, "addonInstallDir", {});
         main_window_geometry_x = toml::find_or<int>(gui, "geometry_x", 0);
         main_window_geometry_y = toml::find_or<int>(gui, "geometry_y", 0);
         main_window_geometry_w = toml::find_or<int>(gui, "geometry_w", 0);
@@ -508,12 +584,17 @@ void save(const std::filesystem::path& path) {
     data["General"]["isPS4Pro"] = isNeo;
     data["General"]["Fullscreen"] = isFullscreen;
     data["General"]["playBGM"] = playBGM;
+    data["General"]["BGMvolume"] = BGMvolume;
+    data["General"]["enableDiscordRPC"] = enableDiscordRPC;
     data["General"]["logFilter"] = logFilter;
     data["General"]["logType"] = logType;
     data["General"]["userName"] = userName;
     data["General"]["updateChannel"] = updateChannel;
     data["General"]["showSplash"] = isShowSplash;
     data["General"]["autoUpdate"] = isAutoUpdate;
+    data["Input"]["cursorState"] = cursorState;
+    data["Input"]["cursorHideTimeout"] = cursorHideTimeout;
+    data["Input"]["backButtonBehavior"] = backButtonBehavior;
     data["Input"]["useSpecialPad"] = useSpecialPad;
     data["Input"]["specialPadClass"] = specialPadClass;
     data["GPU"]["screenWidth"] = screenWidth;
@@ -521,7 +602,6 @@ void save(const std::filesystem::path& path) {
     data["GPU"]["nullGpu"] = isNullGpu;
     data["GPU"]["copyGPUBuffers"] = shouldCopyGPUBuffers;
     data["GPU"]["dumpShaders"] = shouldDumpShaders;
-    data["GPU"]["dumpPM4"] = shouldDumpPM4;
     data["GPU"]["vblankDivider"] = vblankDivider;
     data["Vulkan"]["gpuId"] = gpuId;
     data["Vulkan"]["validation"] = vkValidation;
@@ -539,7 +619,15 @@ void save(const std::filesystem::path& path) {
     data["GUI"]["gameTableMode"] = m_table_mode;
     data["GUI"]["mw_width"] = m_window_size_W;
     data["GUI"]["mw_height"] = m_window_size_H;
-    data["GUI"]["installDir"] = std::string{fmt::UTF(settings_install_dir.u8string()).data};
+
+    std::vector<std::string> install_dirs;
+    for (const auto& dirString : settings_install_dirs) {
+        install_dirs.emplace_back(std::string{fmt::UTF(dirString.u8string()).data});
+    }
+    data["GUI"]["installDirs"] = install_dirs;
+
+    data["GUI"]["addonInstallDir"] =
+        std::string{fmt::UTF(settings_addon_install_dir.u8string()).data};
     data["GUI"]["geometry_x"] = main_window_geometry_x;
     data["GUI"]["geometry_y"] = main_window_geometry_y;
     data["GUI"]["geometry_w"] = main_window_geometry_w;
@@ -560,12 +648,21 @@ void setDefaultValues() {
     isNeo = false;
     isFullscreen = false;
     playBGM = false;
+    BGMvolume = 50;
+    enableDiscordRPC = true;
     screenWidth = 1280;
     screenHeight = 720;
     logFilter = "";
     logType = "async";
     userName = "shadPS4";
-    updateChannel = "stable";
+    if (Common::isRelease) {
+        updateChannel = "Release";
+    } else {
+        updateChannel = "Nightly";
+    }
+    cursorState = HideCursorState::Idle;
+    cursorHideTimeout = 5;
+    backButtonBehavior = "left";
     useSpecialPad = false;
     specialPadClass = 1;
     isDebugDump = false;
@@ -573,7 +670,6 @@ void setDefaultValues() {
     isAutoUpdate = false;
     isNullGpu = false;
     shouldDumpShaders = false;
-    shouldDumpPM4 = false;
     vblankDivider = 1;
     vkValidation = false;
     vkValidationSync = false;
